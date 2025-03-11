@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Form, SubContainerSign } from './styles';
-import Input from '../../Components/Input';
-import Botao from '../../Components/Botao';
-import { validarEmail, validarSenha, validarTelefone, validarNome, validarConfirmarSenha } from '../../Utils/validadores';
-import UserService from '../../Services/UserService';
+import { Container, Form, SubContainerSign } from './styles'; // Ajuste de caminho
+import Input from '../../Components/Input'; // Ajuste de caminho
+import Botao from '../../Components/Botao'; // Ajuste de caminho
+import { validarEmail, validarSenha, validarTelefone, validarNome, validarConfirmarSenha } from '../../Utils/validadores'; // Ajuste de caminho
+import UserService from '../../Services/UserService'; // Ajuste de caminho
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const userService = new UserService();
@@ -63,28 +63,27 @@ const Cadastro = () => {
 
   return (
     <Container>
-      <Form><p>Bem-vindo! <span role="img" aria-label="rosto sorridente">😄</span></p>
+     <Form onSubmit={handleSubmit}>
+  <p>Bem-vindo! <span role="img" aria-label="rosto sorridente">😄</span></p>
 
+  <Input name="nome" placeholder="Digite o seu nome" onChange={handleChange} type="text" />
+  <Input name="telefone" placeholder="Digite o seu telefone" onChange={handleChange} type="number" />
+  <Input name="email" placeholder="Digite o seu e-mail" onChange={handleChange} type="email" />
+  <Input name="password" placeholder="Digite a sua senha" onChange={handleChange} type="password" />
+  <Input name="confirmarPassword" placeholder="Confirme a sua senha" onChange={handleChange} type="password" />
   
+  <Botao
+    type="submit"
+    text={loading ? 'Cadastrando...' : 'Efetuar Cadastro!'}
+    disabled={loading || !validadorInput()}
+  />
+  
+  <SubContainerSign>
+    <p>Já possui conta?</p>
+    <NavLink to="/login">Login</NavLink>
+  </SubContainerSign>
+</Form>
 
-
-
-        <Input name="nome" placeholder="Digite o seu nome" onChange={handleChange} type="text" />
-        <Input name="telefone" placeholder="Digite o seu telefone" onChange={handleChange} type="number" />
-        <Input name="email" placeholder="Digite o seu e-mail" onChange={handleChange} type="email" />
-        <Input name="password" placeholder="Digite a sua senha" onChange={handleChange} type="password" />
-        <Input name="confirmarPassword" placeholder="Confirme a sua senha" onChange={handleChange} type="password" />
-        <Botao
-          type="submit"
-          text={loading ? 'Cadastrando...' : 'Efetuar Cadastro!'}
-          onClick={handleSubmit}
-          disabled={loading || !validadorInput()}
-        />
-        <SubContainerSign>
-          <p>Já possui conta?</p>
-          <NavLink to="/login">Login</NavLink>
-        </SubContainerSign>
-      </Form>
     </Container>
   );
 };
