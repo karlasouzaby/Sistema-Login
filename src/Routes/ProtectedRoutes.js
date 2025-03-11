@@ -1,16 +1,35 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from '../Pages/Login';  // Importação de Login
+import Cadastro from '../Pages/Cadastro';  // Importação de Cadastro
+import ProtectedRoutes from './ProtectedRoutes';  // Importação de ProtectedRoutes
 
-const ProtectedRoutes = ({ children }) => {
-  const token = localStorage.getItem('token'); // Verifica o token no localStorage
+const Routering = () => {
+  return (
+    <Router>
+      <Routes>
+        {/* Rota de Login */}
+        <Route path="/login" element={<Login />} />
+        
+        {/* Rota de Cadastro */}
+        <Route path="/cadastrar" element={<Cadastro />} />
+        
+        {/* Rota Protegida */}
+        <Route 
+          path="/home" 
+          element={
+            <ProtectedRoutes>
+              {/* Conteúdo da rota protegida */}
+              <h1>Home - Página Protegida</h1>
+            </ProtectedRoutes>
+          } 
+        />
 
-  if (!token) {
-    // Se não tiver token, redireciona para o login
-    return <Navigate to="/login" />;
-  }
-
-  // Se tiver token, renderiza o conteúdo protegido
-  return children;
+        {/* Redireciona para a página de login caso a rota não seja encontrada */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
+  );
 };
 
-export default ProtectedRoutes;
+export default Routering;

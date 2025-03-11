@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from '../Pages/Login';  // Importação de Login
-import Cadastro from '../Pages/Cadastro';  // Importação de Cadastro
-import ProtectedRoutes from './ProtectedRoutes';  // Importação de ProtectedRoutes
+import Login from '../Pages/Login'; // Importação de Login
+import Cadastro from '../Pages/Cadastro'; // Importação de Cadastro
+import ProtectedRoutes from './ProtectedRoutes'; // Importação de ProtectedRoutes
 
 const Routering = () => {
   return (
@@ -20,7 +20,7 @@ const Routering = () => {
             <h1>Home</h1>
           </ProtectedRoutes>
         } />
-
+        
         {/* Redireciona para a página de login caso a rota não seja encontrada */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
